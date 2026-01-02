@@ -23,7 +23,8 @@ import Foundation
 ///     }
 /// }
 /// ```
-public final class ThreadSafeQueue<Element>: ThreadSafeCollection, @unchecked Sendable {
+public final class ThreadSafeQueue<Element>: ThreadSafeCollection, @unchecked Sendable
+where Element: Sendable {
   private var storage: [Element]
   private let lock: LockingStrategy
 

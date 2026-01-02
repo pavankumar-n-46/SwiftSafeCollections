@@ -13,7 +13,8 @@ import Foundation
 /// print(deque.removeFront()) // Optional(0)
 /// print(deque.removeBack())  // Optional(1)
 /// ```
-public final class ThreadSafeDeque<Element>: ThreadSafeCollection, @unchecked Sendable {
+public final class ThreadSafeDeque<Element>: ThreadSafeCollection, @unchecked Sendable
+where Element: Sendable {
   private var storage: [Element]
   private let lock: LockingStrategy
 

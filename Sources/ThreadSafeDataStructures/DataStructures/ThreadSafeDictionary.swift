@@ -25,7 +25,7 @@ import Foundation
 /// ```
 public final class ThreadSafeDictionary<Key: Hashable, Value>: ThreadSafeCollection,
   ThreadSafeSubscriptable, @unchecked Sendable
-{
+where Key: Sendable, Value: Sendable {
   public typealias Element = (key: Key, value: Value)
   public typealias Index = Key
 

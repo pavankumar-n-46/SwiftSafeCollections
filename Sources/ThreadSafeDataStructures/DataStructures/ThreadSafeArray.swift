@@ -26,8 +26,8 @@ import Foundation
 /// ```
 public final class ThreadSafeArray<Element>: ThreadSafeSequence, ThreadSafeSubscriptable,
   @unchecked Sendable
-{
-  private var storage: Array<Element>
+where Element: Sendable {
+  private var storage: [Element]
   private let lock: LockingStrategy
 
   // MARK: - Initialization

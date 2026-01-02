@@ -18,7 +18,8 @@ import Foundation
 /// let set2: ThreadSafeSet<Int> = [3, 4, 5]
 /// let union = set1.union(set2)  // [1, 2, 3, 4, 5]
 /// ```
-public final class ThreadSafeSet<Element: Hashable>: ThreadSafeCollection, @unchecked Sendable {
+public final class ThreadSafeSet<Element: Hashable>: ThreadSafeCollection, @unchecked Sendable
+where Element: Sendable {
   private var storage: Set<Element>
   private let lock: LockingStrategy
 

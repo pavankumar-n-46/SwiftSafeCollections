@@ -12,7 +12,8 @@ import Foundation
 /// stack.push("second")
 /// print(stack.pop()) // Optional("second")
 /// ```
-public final class ThreadSafeStack<Element>: ThreadSafeCollection, @unchecked Sendable {
+public final class ThreadSafeStack<Element>: ThreadSafeCollection, @unchecked Sendable
+where Element: Sendable {
   private var storage: [Element]
   private let lock: LockingStrategy
 
