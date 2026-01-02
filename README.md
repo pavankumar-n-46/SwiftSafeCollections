@@ -2,6 +2,7 @@
 
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20visionOS%20%7C%20Linux-blue.svg)](https://swift.org)
+[![CI](https://github.com/pavankumar-n-46/SwiftSafeCollections/actions/workflows/ci.yml/badge.svg)](https://github.com/pavankumar-n-46/SwiftSafeCollections/actions/workflows/ci.yml)
 [![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://swift.org/package-manager)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-86%20passing-success.svg)](Tests/)
