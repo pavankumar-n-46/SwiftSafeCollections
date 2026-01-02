@@ -1,6 +1,6 @@
 # SwiftSafeCollections
 
-[![Swift](https://img.shields.io/badge/Swift-6.2-orange.svg)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20visionOS%20%7C%20Linux-blue.svg)](https://swift.org)
 [![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://swift.org/package-manager)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -37,13 +37,13 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/ThreadSafeDataStructures.git", from: "1.0.0")
+    .package(url: "https://github.com/pavankumar-n-46/SwiftSafeCollections", from: "1.0.0")
 ]
 ```
 
 Or in Xcode:
 1. File → Add Package Dependencies
-2. Enter: `https://github.com/yourusername/ThreadSafeDataStructures`
+2. Enter: `https://github.com/pavankumar-n-46/SwiftSafeCollections`
 3. Select version and add to your target
 
 ## 💡 Quick Start
@@ -282,16 +282,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 Built with:
-- Swift 6.2
+- Swift 6.0
 - Swift Testing framework
 - Protocol-Oriented Programming principles
 - Test-Driven Development methodology
 
 ## 📞 Support
 
-- 🐛 [Report a bug](https://github.com/yourusername/ThreadSafeDataStructures/issues)
-- 💡 [Request a feature](https://github.com/yourusername/ThreadSafeDataStructures/issues)
-- 📖 [Read the docs](https://github.com/yourusername/ThreadSafeDataStructures/wiki)
+- 🐛 [Report a bug](https://github.com/pavankumar-n-46/SwiftSafeCollections/issues)
+- � [Request a feature](https://github.com/pavankumar-n-46/SwiftSafeCollections/issues)
+- � [Read the docs](https://github.com/pavankumar-n-46/SwiftSafeCollections/wiki)
 
 ---
 
