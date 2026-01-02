@@ -256,6 +256,25 @@ All operations are:
 - ✅ **Consistent**: Snapshots provide point-in-time views
 - ✅ **Sendable**: Swift 6 concurrency compliant
 
+### Important: Sendable Requirement
+
+All generic type parameters require `Sendable` conformance:
+
+```swift
+// ✅ Works - Int is Sendable
+let numbers = ThreadSafeArray<Int>()
+
+// ✅ Works - Sendable struct
+struct User: Sendable { let id: String }
+let users = ThreadSafeArray<User>()
+
+// ❌ Won't compile - Non-Sendable class
+class UnsafeData { var value: Int }
+let data = ThreadSafeArray<UnsafeData>()  // Error!
+```
+
+**Why?** Locks protect collection storage, but not element mutations. `Sendable` ensures elements themselves are thread-safe.
+
 ## 📚 Documentation
 
 Full API documentation is available in the source code. Each type includes:
