@@ -4,23 +4,34 @@
 import PackageDescription
 
 let package = Package(
-    name: "ThreadSafeDataStructures",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "ThreadSafeDataStructures",
-            targets: ["ThreadSafeDataStructures"]
-        ),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "ThreadSafeDataStructures"
-        ),
-        .testTarget(
-            name: "ThreadSafeDataStructuresTests",
-            dependencies: ["ThreadSafeDataStructures"]
-        ),
-    ]
+  name: "ThreadSafeDataStructures",
+  platforms: [
+    .macOS(.v10_15),
+    .iOS(.v13),
+    .tvOS(.v13),
+    .watchOS(.v6),
+    .visionOS(.v1),
+  ],
+  products: [
+    .library(
+      name: "ThreadSafeDataStructures",
+      targets: ["ThreadSafeDataStructures"]
+    )
+  ],
+  dependencies: [
+    // Swift Testing framework - explicit dependency for compatibility
+    .package(url: "https://github.com/apple/swift-testing.git", from: "0.10.0")
+  ],
+  targets: [
+    .target(
+      name: "ThreadSafeDataStructures"
+    ),
+    .testTarget(
+      name: "ThreadSafeDataStructuresTests",
+      dependencies: [
+        "ThreadSafeDataStructures",
+        .product(name: "Testing", package: "swift-testing"),
+      ]
+    ),
+  ]
 )

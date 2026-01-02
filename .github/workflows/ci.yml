@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }} - Swift ${{ matrix.swift }}
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [macos-14, ubuntu-latest]
+        swift: ['6.2']
+        include:
+          - os: macos-14
+            xcode: '16.2'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Swift (macOS)
+      if: runner.os == 'macOS'
+      uses: swift-actions/setup-swift@v2
+      with:
+        swift-version: ${{ matrix.swift }}
+    
+    - name: Setup Swift (Linux)
+      if: runner.os == 'Linux'
+      uses: swift-actions/setup-swift@v2
+      with:
+        swift-version: ${{ matrix.swift }}
+    
+    - name: Swift version
+      run: swift --version
+    
+    - name: Build
+      run: swift build -v
+    
+    - name: Run tests
+      run: swift test -v
+    
+    - name: Generate test coverage (macOS only)
+      if: runner.os == 'macOS'
+      run: |
+        swift test --enable-code-coverage
+        xcrun llvm-cov export -format="lcov" \
+          .build/debug/ThreadSafeDataStructuresPackageTests.xctest/Contents/MacOS/ThreadSafeDataStructuresPackageTests \
+          -instr-profile .build/debug/codecov/default.profdata > coverage.lcov
+    
+    - name: Upload coverage to Codecov (macOS only)
+      if: runner.os == 'macOS'
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./coverage.lcov
+        fail_ci_if_error: false
+
+  lint:
+    name: SwiftLint
+    runs-on: macos-14
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: SwiftLint
+      run: |
+        if which swiftlint >/dev/null; then
+          swiftlint --strict
+        else
+          echo "SwiftLint not installed, skipping..."
+        fi
+
+  build-platforms:
+    name: Build for ${{ matrix.platform }}
+    runs-on: macos-14
+    
+    strategy:
+      matrix:
+        platform: [iOS, tvOS, watchOS, visionOS]
+        include:
+          - platform: iOS
+            destination: 'platform=iOS Simulator,name=iPhone 15,OS=17.5'
+          - platform: tvOS
+            destination: 'platform=tvOS Simulator,name=Apple TV,OS=17.5'
+          - platform: watchOS
+            destination: 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.5'
+          - platform: visionOS
+            destination: 'platform=visionOS Simulator,name=Apple Vision Pro,OS=1.2'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Build for ${{ matrix.platform }}
+      run: |
+        xcodebuild build \
+          -scheme ThreadSafeDataStructures \
+          -destination '${{ matrix.destination }}' \
+          -skipPackagePluginValidation \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO
